@@ -1,54 +1,64 @@
 body {
   margin: 0;
-  padding: 0;
-  height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2b2b3d);
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Roboto", sans-serif;
-  background: #ffffff;
-  color: #2c3e50;
+  height: 100vh;
 }
 
-.container {
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 40px;
   text-align: center;
-  max-width: 500px;
-  padding: 20px;
+  width: 350px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
 }
 
-h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
+.card h1 {
   font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 26px;
 }
 
-.subtitle {
-  font-size: 16px;
-  margin-bottom: 30px;
-  color: #555;
+.card p {
+  font-weight: 300;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #cfcfcf;
 }
 
-.contacts {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
-.contacts li {
-  margin: 15px 0;
-  font-size: 18px;
-}
-
-.contacts a {
+.socials a {
   text-decoration: none;
-  color: #2980b9;
+  color: white;
+  font-size: 22px;
+  transition: 0.3s;
 }
 
-.contacts a:hover {
-  text-decoration: underline;
+.socials a:hover {
+  color: #4dabf7;
+  transform: scale(1.1);
 }
 
-.contacts i {
-  margin-right: 10px;
-  color: #2980b9;
+.email {
+  display: block;
+  margin-top: 25px;
+  font-size: 14px;
+  color: #a1a1a1;
+  text-decoration: none;
+}
+
+.email:hover {
+  color: #fff;
 }
