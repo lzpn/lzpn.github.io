@@ -17,12 +17,16 @@
     box-sizing: border-box;
 }
 
+/* ✅ FIX CRITICO: Torniamo a min-height ma gestendo meglio la centratura per lo scroll */
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--background-dark); 
     color: var(--text-light);
-    /* ✅ MODIFICA CRITICA PER MOBILE PULL-TO-REFRESH: Usiamo height: 100% e non min-height: 100vh */
-    height: 100%;
+    min-height: 100vh; /* Permette alla card di centrare se il contenuto è piccolo */
     
     /* Centratura */
     display: flex;
@@ -31,8 +35,7 @@ body {
     
     line-height: 1.6;
     overflow-x: hidden; 
-    /* Aggiungiamo overflow-y: auto per garantire lo scroll verticale standard */
-    overflow-y: auto; 
+    /* Lasciamo overflow-y in auto/default per garantire lo scroll e il pull-to-refresh */
 }
 
 /* * 2. Effetto Sfondo Dinamico (Blob/Gradiente Animato)
@@ -63,8 +66,7 @@ body {
     width: 100%;
     max-width: 420px; 
     padding: 20px; 
-    /* ✅ MODIFICA: Assicura che la card non si attacchi ai bordi del viewport su schermi molto larghi/piccoli */
-    margin: auto 0; 
+    /* Rimosso margin: auto 0; per non interferire con il flexbox del body */
 }
 
 .card {
@@ -110,8 +112,6 @@ body {
     margin: 40px 0;
 }
 
-/* La classe .email-text è stata rimossa dal CSS poiché è stata rimossa dall'HTML */
-
 /* * 5. Link Social 
  * ---------------- 
  */
@@ -143,46 +143,53 @@ body {
     box-shadow: var(--hover-glow);
 }
 
-/* * 6. Ottimizzazione Mobile (Media Queries Rinforzate)
+/* * 6. Ottimizzazione Mobile (Design Migliorato)
  * ---------------------------------------------------- 
  */
 
 @media (max-width: 480px) {
-    /* Reimpostiamo il body su mobile per consentire lo scroll standard */
+    /* Per gli schermi piccoli, usiamo un display block ma aggiungiamo un padding 
+       sicuro al body in alto e in basso per la centratura visiva. */
     body {
-        /* Rimuoviamo la centratura forzata in verticale per consentire il pull-to-refresh */
-        display: block; 
-        padding: 5vh 10px; /* Padding visivo per staccare dal bordo */
+        /* Rimuoviamo la centratura forzata in verticale solo se necessario, 
+           ma lasciamola attiva se il contenuto è molto piccolo */
+        align-items: center; 
+        padding: 5vh 10px; 
     }
     
     .card-container {
         padding: 0; 
-        margin: 0 auto; /* Centra orizzontalmente */
+        margin: 0 auto;
     }
 
     .card {
-        padding: 35px 20px; 
-        border-radius: 16px;
+        /* Aumento leggero del padding per un look meno compresso */
+        padding: 40px 25px; 
+        border-radius: 20px; /* Bordi più ampi per coerenza con il desktop */
     }
     
     .name {
-        font-size: 2rem;
+        font-size: 2.2rem; /* Leggermente più grande */
         letter-spacing: 1.5px;
     }
 
     .tagline {
-        font-size: 0.9rem;
-        margin-bottom: 25px;
+        font-size: 1rem;
+        margin-bottom: 30px; /* Spaziatura maggiore */
     }
     
+    .separator {
+        margin: 30px 0;
+    }
+
     .social-links {
-        gap: 15px;
+        gap: 20px; /* Spazio aumentato per un look più pulito */
     }
 
     .social-links a {
-        width: 42px;
-        height: 42px;
-        font-size: 1.3rem;
+        width: 48px; /* Leggermente più grandi */
+        height: 48px;
+        font-size: 1.5rem; /* Icone più grandi */
     }
 }
 
