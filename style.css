@@ -3,8 +3,8 @@
  */
 :root {
     /* Colori */
-    --primary-color: #2196F3; /* Blu di riserva */
-    --fluo-green: #39FF14; /* Verde Fluo */
+    --primary-color: #2196F3;
+    --fluo-green: #39FF14; 
     --text-light: #F0F0F0;
     --background-dark: #121212; 
     --card-bg-blur: rgba(30, 30, 30, 0.8); 
@@ -17,21 +17,31 @@
     box-sizing: border-box;
 }
 
+/* ✅ FIX SCROLL 1/2: Blocca lo scroll sia su html che su body per gli elementi che non devono uscire */
+html, body {
+    height: 100%;
+    overflow: hidden; 
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    /* Sfondo scuro con gradiente semplice */
     background: linear-gradient(135deg, var(--background-dark) 0%, #000000 100%); 
     color: var(--text-light);
-    min-height: 100vh;
+    /* min-height: 100vh; rimosso per evitare conflitti con height: 100% */
     
-    /* Centratura per desktop e mobile */
+    /* Centratura */
     display: flex;
     justify-content: center;
     align-items: center;    
     
     padding: 20px;
     line-height: 1.6;
-    overflow-x: hidden; /* Previene lo scroll orizzontale */
+    overflow-x: hidden; 
+}
+
+a {
+    /* ✅ FIX SOTTOLINEATURA INTERROTTA: Rimuove la decorazione dai link ovunque */
+    text-decoration: none;
 }
 
 /* * 2. Stile della Card Centrale 
@@ -41,6 +51,9 @@ body {
     width: 100%;
     max-width: 400px; 
     padding: 0;
+    /* ✅ FIX SCROLL 2/2: Permette un leggero scroll interno solo se necessario (molto raro qui) */
+    overflow-y: auto; 
+    max-height: 100vh;
 }
 
 .card {
@@ -49,7 +62,7 @@ body {
     padding: 40px 30px;
     text-align: center;
     border: 1px solid var(--border-light); 
-    backdrop-filter: blur(8px); /* Glassmorphism leggero */
+    backdrop-filter: blur(8px); 
     -webkit-backdrop-filter: blur(8px); 
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); 
     transition: transform 0.3s ease-in-out;
@@ -60,15 +73,14 @@ body {
     box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* * 3. Tipografia (APPLICAZIONE VERDE FLUO)
- * ----------------------------------------- 
+/* * 3. Tipografia (VERDE FLUO)
+ * ---------------------------- 
  */
 .name {
     font-size: 2.5rem; 
     font-weight: 700;
     margin-bottom: 5px;
     letter-spacing: 1px;
-    /* ✅ Verde Fluo al Nome */
     color: var(--fluo-green); 
     text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
 }
@@ -77,17 +89,13 @@ body {
     font-size: 1.1rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.8);
-    /* Riduci il margine inferiore poiché non c'è più h2 */
     margin-bottom: 30px; 
 }
-
-/* h2 e .email-text sono stati rimossi dal CSS */
 
 .separator {
     border: none;
     height: 1px;
     background-color: var(--border-light);
-    /* Riduci il margine superiore per avvicinare i contatti */
     margin: 30px 0 20px; 
 }
 
@@ -97,9 +105,8 @@ body {
 .social-links {
     display: flex;
     justify-content: center;
-    /* Spaziatura più ampia ora che sono gli unici elementi sotto la riga */
     gap: 30px; 
-    margin-bottom: 0; /* Nessun elemento sotto, quindi margine zero */
+    margin-bottom: 0; 
 }
 
 .social-links a {
@@ -110,19 +117,23 @@ body {
 }
 
 .social-links a:hover {
-    /* ✅ Hover in Verde Fluo con Glow */
     color: var(--fluo-green); 
     text-shadow: 0 0 5px rgba(57, 255, 20, 0.8);
     transform: scale(1.15); 
 }
 
-/* * 5. Ottimizzazione Mobile (Fix per il "Pull-to-Refresh")
- * ------------------------------------------------------ 
+/* * 5. Ottimizzazione Mobile 
+ * ------------------------ 
  */
 @media (max-width: 480px) {
+    /* Rimuove il padding dal body su mobile per massimizzare lo spazio */
     body {
-        padding: 5vh 15px; 
-        min-height: 100vh; 
+        padding: 0; 
+    }
+    
+    /* La card-container può ora occupare tutto lo spazio verticale disponibile */
+    .card-container {
+        padding: 5vh 15px; /* Aggiungi il padding qui per staccare la card dai bordi */
     }
 
     .card {
@@ -136,7 +147,6 @@ body {
 
     .tagline {
         font-size: 1rem;
-        /* Riduci il margine per coerenza mobile */
         margin-bottom: 25px; 
     }
     
