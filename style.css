@@ -1,3 +1,16 @@
+/* * 1. Reset e Font Base 
+ * -------------------- 
+ */
+:root {
+    /* Colori */
+    --primary-color: #2196F3; /* Blu visibile per icone/link */
+    --text-light: #F0F0F0;
+    --text-dark: #333333;
+    --background-dark: #121212; /* Sfondo molto scuro */
+    --card-bg-blur: rgba(30, 30, 30, 0.8); /* Sfondo scuro semi-trasparente */
+    --border-light: rgba(255, 255, 255, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,111 +18,140 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
-    color: #f0f0f0;
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--background-dark) 0%, #000000 100%); /* Sfondo scuro con gradiente */
+    color: var(--text-light);
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centratura orizzontale */
+    align-items: center;    /* Centratura verticale */
+    padding: 20px;
+    line-height: 1.6;
 }
 
-.container {
+/* * 2. Stile della Card Centrale (Glassmorphism)
+ * -------------------------------------------- 
+ */
+.card-container {
     width: 100%;
+    max-width: 400px; /* Larghezza massima per desktop */
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
+    background: var(--card-bg-blur);
     border-radius: 20px;
     padding: 40px 30px;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    max-width: 350px;
-    width: 100%;
+    border: 1px solid var(--border-light); /* Bordo sottile per effetto glass */
+    backdrop-filter: blur(10px); /* Effetto Glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilità Safari */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Ombra delicata */
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Avatar opzionale */
-.avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
+.card:hover {
+    transform: translateY(-5px); /* Leggero sollevamento all'hover */
 }
 
-/* Nome */
-.card h1 {
-    font-size: 2em;
+/* * 3. Tipografia 
+ * ------------- 
+ */
+.name {
+    font-size: 2.5rem; /* Nome in evidenza e grande */
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
 }
 
-/* Motto */
-.motto {
-    font-size: 1em;
-    font-weight: 400;
-    margin-bottom: 30px;
-    color: #ccc;
+.tagline {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
 }
 
-/* Contatti */
-.contacts {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 
-.contact-link {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1em;
-    color: #f0f0f0;
-    padding: 10px 15px;
-    border-radius: 10px;
-    transition: all 0.3s;
-    background: rgba(255,255,255,0.05);
-}
-
-.contact-link:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateY(-2px);
-    color: #4da6ff;
-}
-
-/* Email sotto le icone */
 .email-text {
-    font-size: 0.9em;
-    color: #ccc;
-    margin-top: 10px;
-    word-break: break-all;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.7;
 }
 
-.email-text a {
-    color: #ccc;
-    text-decoration: underline;
-    transition: color 0.3s;
+.separator {
+    border: none;
+    height: 1px;
+    background-color: var(--border-light);
+    margin: 30px 0;
 }
 
-.email-text a:hover {
-    color: #4da6ff;
+/* * 4. Avatar (Opzionale)
+ * ---------------------
+ */
+.avatar {
+    margin-bottom: 20px;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 400px) {
+.avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Foto tonda */
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+/* * 5. Link Social e Hover Effects
+ * ------------------------------
+ */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Spaziatura ampia tra le icone */
+    margin-bottom: 15px;
+}
+
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-flex; /* Assicura un buon target di click */
+}
+
+.social-links a:hover {
+    color: var(--primary-color); /* Colore primario all'hover */
+    transform: scale(1.15); /* Effetto hover leggero e morbido */
+}
+
+/* * 6. Mobile Optimization (Garantire la responsività)
+ * -------------------------------------------------- 
+ */
+@media (max-width: 480px) {
     .card {
         padding: 30px 20px;
     }
-    .card h1 {
-        font-size: 1.7em;
+    
+    .name {
+        font-size: 2rem;
     }
-    .contact-link {
-        font-size: 0.95em;
-        padding: 8px 12px;
+
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .social-links {
+        gap: 20px;
+    }
+
+    .social-links a {
+        font-size: 1.6rem;
     }
 }
