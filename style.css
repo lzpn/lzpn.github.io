@@ -1,11 +1,9 @@
-/* Reset base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Font e corpo pagina */
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
@@ -16,7 +14,6 @@ body {
     align-items: center;
 }
 
-/* Container card */
 .container {
     display: flex;
     justify-content: center;
@@ -25,7 +22,6 @@ body {
     padding: 20px;
 }
 
-/* Card */
 .card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -37,23 +33,12 @@ body {
     width: 100%;
 }
 
-/* Avatar opzionale */
-.avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-}
-
-/* Nome */
 .card h1 {
     font-size: 2em;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
-/* Motto */
 .motto {
     font-size: 1em;
     font-weight: 400;
@@ -61,42 +46,37 @@ body {
     color: #ccc;
 }
 
-/* Contatti */
 .contacts {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 15px;
     margin-bottom: 15px;
 }
 
-/* Icone */
-.contact-icon {
+.contact-text {
     color: #f0f0f0;
-    font-size: 1.5em;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
     transition: transform 0.3s, color 0.3s;
 }
 
-.contact-icon:hover {
-    transform: scale(1.2);
+.contact-text:hover {
+    transform: scale(1.05);
     color: #4da6ff;
 }
 
-/* Email testo chiaro */
 .email-text {
     font-size: 0.9em;
     color: #ccc;
     word-break: break-all;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 400px) {
     .card {
         padding: 30px 20px;
     }
     .card h1 {
         font-size: 1.7em;
-    }
-    .contact-icon {
-        font-size: 1.3em;
     }
 }
