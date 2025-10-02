@@ -3,12 +3,12 @@
  */
 :root {
     /* Colori */
-    --primary-color: #2196F3; /* Blu visibile per icone/link */
+    --primary-color: #00BFFF; /* Ciano brillante per accenti */
     --text-light: #F0F0F0;
-    --text-dark: #333333;
-    --background-dark: #121212; /* Sfondo molto scuro */
-    --card-bg-blur: rgba(30, 30, 30, 0.8); /* Sfondo scuro semi-trasparente */
+    --background-dark: #0A0A10; /* Nero quasi assoluto */
+    --card-bg-blur: rgba(15, 15, 25, 0.75); /* Sfondo scuro semi-trasparente */
     --border-light: rgba(255, 255, 255, 0.1);
+    --hover-glow: 0 0 10px rgba(0, 191, 255, 0.6);
 }
 
 * {
@@ -19,128 +19,148 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, var(--background-dark) 0%, #000000 100%); /* Sfondo scuro con gradiente */
+    background-color: var(--background-dark); 
     color: var(--text-light);
     min-height: 100vh;
     display: flex;
-    justify-content: center; /* Centratura orizzontale */
-    align-items: center;    /* Centratura verticale */
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     line-height: 1.6;
+    overflow: hidden; /* Nasconde l'overflow dell'effetto sfondo */
 }
 
-/* * 2. Stile della Card Centrale (Glassmorphism)
- * -------------------------------------------- 
+/* * 2. Effetto Sfondo Dinamico (Esempio Blob/Gradiente Animato)
+ * ------------------------------------------------------------ 
+ */
+.background-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Utilizzo di un gradiente radiale per un effetto luce diffusa */
+    background: radial-gradient(circle at 10% 90%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(255, 0, 200, 0.15) 0%, transparent 50%);
+    opacity: 0.8;
+    z-index: -1;
+    /* Opzionale: animazione lenta per un effetto "breathing" */
+    animation: gradientShift 20s ease infinite alternate;
+}
+
+@keyframes gradientShift {
+    0% { background-size: 400% 400%; background-position: 0% 50%; }
+    100% { background-size: 400% 400%; background-position: 100% 50%; }
+}
+
+
+/* * 3. Stile della Card Centrale (Glassmorphism + Glow)
+ * ---------------------------------------------------- 
  */
 .card-container {
     width: 100%;
-    max-width: 400px; /* Larghezza massima per desktop */
+    max-width: 420px; 
     padding: 20px;
 }
 
 .card {
     background: var(--card-bg-blur);
-    border-radius: 20px;
-    padding: 40px 30px;
+    border-radius: 24px; /* Bordi più accentuati */
+    padding: 50px 35px; /* Spaziatura maggiore */
     text-align: center;
-    border: 1px solid var(--border-light); /* Bordo sottile per effetto glass */
-    backdrop-filter: blur(10px); /* Effetto Glassmorphism */
-    -webkit-backdrop-filter: blur(10px); /* Compatibilità Safari */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Ombra delicata */
-    transition: transform 0.3s ease-in-out;
+    border: 1px solid rgba(0, 191, 255, 0.2); /* Bordo glass più chiaro */
+    backdrop-filter: blur(15px); /* Effetto Glassmorphism più forte */
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--hover-glow); /* Ombra profonda e glow sottile */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Leggero sollevamento all'hover */
+    transform: translateY(-8px); /* Sollevamento più visibile */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-color); /* Glow accentuato */
 }
 
-/* * 3. Tipografia 
+/* * 4. Tipografia 
  * ------------- 
  */
 .name {
-    font-size: 2.5rem; /* Nome in evidenza e grande */
+    font-size: 2.8rem; /* Nome ancora più in evidenza */
     font-weight: 700;
     margin-bottom: 5px;
-    letter-spacing: 1px;
+    letter-spacing: 2px; /* Spaziatura per un look moderno */
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
 }
 
 .tagline {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 25px;
-}
-
-h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--primary-color);
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.email-text {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    font-weight: 400;
-    opacity: 0.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 35px;
 }
 
 .separator {
     border: none;
     height: 1px;
-    background-color: var(--border-light);
-    margin: 30px 0;
+    background: linear-gradient(to right, transparent, var(--border-light), transparent);
+    margin: 40px 0;
 }
 
-/* * 4. Avatar (Opzionale)
- * ---------------------
- */
-.avatar {
-    margin-bottom: 20px;
+.email-text {
+    margin-top: 25px;
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
 }
 
-.avatar img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%; /* Foto tonda */
-    object-fit: cover;
-    border: 3px solid var(--primary-color);
+.email-text i {
+    margin-right: 8px;
+    color: var(--primary-color);
 }
 
-/* * 5. Link Social e Hover Effects
- * ------------------------------
+/* * 5. Link Social (Design a cerchio e animazione)
+ * ------------------------------------------------ 
  */
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 25px; /* Spaziatura ampia tra le icone */
-    margin-bottom: 15px;
+    gap: 30px; 
+    margin-bottom: 10px;
 }
 
 .social-links a {
     color: var(--text-light);
-    font-size: 1.8rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-    display: inline-flex; /* Assicura un buon target di click */
+    font-size: 1.6rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-light);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transizione "bounce" */
 }
 
 .social-links a:hover {
-    color: var(--primary-color); /* Colore primario all'hover */
-    transform: scale(1.15); /* Effetto hover leggero e morbido */
+    color: var(--primary-color); 
+    background-color: rgba(0, 191, 255, 0.05); /* Sfondo leggero all'hover */
+    border-color: var(--primary-color);
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: var(--hover-glow);
 }
 
-/* * 6. Mobile Optimization (Garantire la responsività)
- * -------------------------------------------------- 
+/* * 6. Mobile Optimization 
+ * ------------------------
  */
 @media (max-width: 480px) {
     .card {
-        padding: 30px 20px;
+        padding: 40px 25px;
     }
     
     .name {
-        font-size: 2rem;
+        font-size: 2.2rem;
+        letter-spacing: 1.5px;
     }
 
     .tagline {
@@ -152,6 +172,8 @@ h2 {
     }
 
     .social-links a {
-        font-size: 1.6rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
     }
 }
