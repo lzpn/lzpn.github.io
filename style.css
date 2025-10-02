@@ -15,30 +15,41 @@ body {
 }
 
 .container {
+    width: 100%;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 20px;
 }
 
 .card {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 40px 30px;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     max-width: 350px;
     width: 100%;
 }
 
+/* Avatar opzionale */
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Nome */
 .card h1 {
     font-size: 2em;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
+/* Motto */
 .motto {
     font-size: 1em;
     font-weight: 400;
@@ -46,37 +57,59 @@ body {
     color: #ccc;
 }
 
+/* Contatti */
 .contacts {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: center;
+    gap: 20px;
     margin-bottom: 15px;
 }
 
-.contact-text {
-    color: #f0f0f0;
+.contact-link {
     text-decoration: none;
     font-weight: 500;
     font-size: 1em;
-    transition: transform 0.3s, color 0.3s;
+    color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.05);
 }
 
-.contact-text:hover {
-    transform: scale(1.05);
+.contact-link:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
     color: #4da6ff;
 }
 
+/* Email sotto le icone */
 .email-text {
     font-size: 0.9em;
     color: #ccc;
+    margin-top: 10px;
     word-break: break-all;
 }
 
+.email-text a {
+    color: #ccc;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+.email-text a:hover {
+    color: #4da6ff;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 400px) {
     .card {
         padding: 30px 20px;
     }
     .card h1 {
         font-size: 1.7em;
+    }
+    .contact-link {
+        font-size: 0.95em;
+        padding: 8px 12px;
     }
 }
