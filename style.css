@@ -3,12 +3,11 @@
  */
 :root {
     /* Colori */
-    --primary-color: #00BFFF; /* Ciano brillante per accenti */
+    --primary-color: #2196F3; /* Blu visibile per icone/link */
     --text-light: #F0F0F0;
-    --background-dark: #0A0A10; /* Nero quasi assoluto */
-    --card-bg-blur: rgba(15, 15, 25, 0.75); /* Sfondo scuro semi-trasparente */
+    --background-dark: #121212; /* Sfondo molto scuro */
+    --card-bg-blur: rgba(30, 30, 30, 0.8); /* Sfondo scuro semi-trasparente */
     --border-light: rgba(255, 255, 255, 0.1);
-    --hover-glow: 0 0 10px rgba(0, 191, 255, 0.6);
 }
 
 * {
@@ -17,187 +16,126 @@
     box-sizing: border-box;
 }
 
-/* ✅ FIX CRITICO: Torniamo a min-height ma gestendo meglio la centratura per lo scroll */
-html {
-    height: 100%;
-}
-
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--background-dark); 
+    /* Sfondo scuro con gradiente semplice */
+    background: linear-gradient(135deg, var(--background-dark) 0%, #000000 100%);
     color: var(--text-light);
-    min-height: 100vh; /* Permette alla card di centrare se il contenuto è piccolo */
+    min-height: 100vh;
     
-    /* Centratura */
+    /* Centratura per desktop e mobile */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
     
+    padding: 20px;
     line-height: 1.6;
     overflow-x: hidden; 
-    /* Lasciamo overflow-y in auto/default per garantire lo scroll e il pull-to-refresh */
 }
 
-/* * 2. Effetto Sfondo Dinamico (Blob/Gradiente Animato)
- * ---------------------------------------------------- 
- */
-.background-effect {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 10% 90%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 90% 10%, rgba(255, 0, 200, 0.15) 0%, transparent 50%);
-    opacity: 0.8;
-    z-index: -1;
-    animation: gradientShift 20s ease infinite alternate;
-}
-
-@keyframes gradientShift {
-    0% { background-size: 400% 400%; background-position: 0% 50%; }
-    100% { background-size: 400% 400%; background-position: 100% 50%; }
-}
-
-/* * 3. Stile della Card Centrale (Glassmorphism + Glow)
- * ---------------------------------------------------- 
+/* * 2. Stile della Card Centrale (Glassmorphism Semplice)
+ * ------------------------------------------------------ 
  */
 .card-container {
     width: 100%;
-    max-width: 420px; 
-    padding: 20px; 
-    /* Rimosso margin: auto 0; per non interferire con il flexbox del body */
+    max-width: 400px; /* Larghezza massima */
+    padding: 0;
 }
 
 .card {
     background: var(--card-bg-blur);
-    border-radius: 24px; 
-    padding: 50px 35px; 
+    border-radius: 20px;
+    padding: 40px 30px;
     text-align: center;
-    border: 1px solid rgba(0, 191, 255, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--hover-glow);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid var(--border-light); 
+    backdrop-filter: blur(8px); /* Glassmorphism più leggero */
+    -webkit-backdrop-filter: blur(8px); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Ombra discreta */
+    transition: transform 0.3s ease-in-out;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-color);
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* * 4. Tipografia 
+/* * 3. Tipografia 
  * ------------- 
  */
 .name {
-    font-size: 2.8rem;
+    font-size: 2.5rem; 
     font-weight: 700;
     margin-bottom: 5px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+    letter-spacing: 1px;
+    text-transform: none; /* Rimosso uppercase per look più soft */
 }
 
 .tagline {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 35px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
 }
 
 .separator {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--border-light), transparent);
-    margin: 40px 0;
+    background-color: var(--border-light);
+    margin: 30px 0;
 }
 
-/* * 5. Link Social 
- * ---------------- 
+/* * 4. Link Social (Stile Piatto e Minimal)
+ * ---------------------------------------- 
  */
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 30px; 
-    margin-bottom: 10px;
+    gap: 25px; 
+    margin-bottom: 0; /* Nessun elemento sotto, quindi margine zero */
 }
 
 .social-links a {
     color: var(--text-light);
-    font-size: 1.6rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--border-light);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    font-size: 1.8rem;
+    /* Rimosso lo sfondo/bordo a cerchio per un look più piatto */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-links a:hover {
     color: var(--primary-color); 
-    background-color: rgba(0, 191, 255, 0.05);
-    border-color: var(--primary-color);
-    transform: scale(1.15) rotate(5deg);
-    box-shadow: var(--hover-glow);
+    transform: scale(1.15); 
 }
 
-/* * 6. Ottimizzazione Mobile (Design Migliorato)
- * ---------------------------------------------------- 
+/* * 5. Ottimizzazione Mobile (Risolto Pul-to-Refresh)
+ * ------------------------------------------------- 
  */
-
 @media (max-width: 480px) {
-    /* Per gli schermi piccoli, usiamo un display block ma aggiungiamo un padding 
-       sicuro al body in alto e in basso per la centratura visiva. */
+    /* Manteniamo la centratura, ma permettiamo lo scroll */
     body {
-        /* Rimuoviamo la centratura forzata in verticale solo se necessario, 
-           ma lasciamola attiva se il contenuto è molto piccolo */
-        align-items: center; 
-        padding: 5vh 10px; 
-    }
-    
-    .card-container {
-        padding: 0; 
-        margin: 0 auto;
+        /* Aggiungiamo un padding extra in alto e in basso per la centratura visiva */
+        padding: 5vh 15px; 
+        /* Se il contenuto non entra (improbabile), permettiamo lo scroll. */
     }
 
     .card {
-        /* Aumento leggero del padding per un look meno compresso */
-        padding: 40px 25px; 
-        border-radius: 20px; /* Bordi più ampi per coerenza con il desktop */
+        padding: 30px 20px;
+        border-radius: 16px;
     }
     
     .name {
-        font-size: 2.2rem; /* Leggermente più grande */
-        letter-spacing: 1.5px;
+        font-size: 2rem;
     }
 
     .tagline {
         font-size: 1rem;
-        margin-bottom: 30px; /* Spaziatura maggiore */
+        margin-bottom: 25px;
     }
     
-    .separator {
-        margin: 30px 0;
-    }
-
     .social-links {
-        gap: 20px; /* Spazio aumentato per un look più pulito */
+        gap: 20px;
     }
 
     .social-links a {
-        width: 48px; /* Leggermente più grandi */
-        height: 48px;
-        font-size: 1.5rem; /* Icone più grandi */
-    }
-}
-
-@media (max-width: 340px) {
-    .name {
-        font-size: 1.8rem;
-    }
-    .card {
-        padding: 30px 15px;
+        font-size: 1.6rem;
     }
 }
