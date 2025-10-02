@@ -1,102 +1,179 @@
-/* Reset base */
+/* * 1. Reset e Font Base 
+ * -------------------- 
+ */
+:root {
+    /* Colori */
+    --primary-color: #00BFFF; /* Ciano brillante per accenti */
+    --text-light: #F0F0F0;
+    --background-dark: #0A0A10; /* Nero quasi assoluto */
+    --card-bg-blur: rgba(15, 15, 25, 0.75); /* Sfondo scuro semi-trasparente */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --hover-glow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Font e corpo pagina */
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
-    color: #f0f0f0;
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-dark); 
+    color: var(--text-light);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    line-height: 1.6;
+    overflow: hidden; /* Nasconde l'overflow dell'effetto sfondo */
 }
 
-/* Container card */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* * 2. Effetto Sfondo Dinamico (Esempio Blob/Gradiente Animato)
+ * ------------------------------------------------------------ 
+ */
+.background-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    /* Utilizzo di un gradiente radiale per un effetto luce diffusa */
+    background: radial-gradient(circle at 10% 90%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(255, 0, 200, 0.15) 0%, transparent 50%);
+    opacity: 0.8;
+    z-index: -1;
+    /* Opzionale: animazione lenta per un effetto "breathing" */
+    animation: gradientShift 20s ease infinite alternate;
+}
+
+@keyframes gradientShift {
+    0% { background-size: 400% 400%; background-position: 0% 50%; }
+    100% { background-size: 400% 400%; background-position: 100% 50%; }
+}
+
+
+/* * 3. Stile della Card Centrale (Glassmorphism + Glow)
+ * ---------------------------------------------------- 
+ */
+.card-container {
+    width: 100%;
+    max-width: 420px; 
     padding: 20px;
 }
 
-/* Card */
 .card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 40px 30px;
+    background: var(--card-bg-blur);
+    border-radius: 24px; /* Bordi più accentuati */
+    padding: 50px 35px; /* Spaziatura maggiore */
     text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    max-width: 350px;
-    width: 100%;
+    border: 1px solid rgba(0, 191, 255, 0.2); /* Bordo glass più chiaro */
+    backdrop-filter: blur(15px); /* Effetto Glassmorphism più forte */
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--hover-glow); /* Ombra profonda e glow sottile */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Avatar opzionale */
-.avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
+.card:hover {
+    transform: translateY(-8px); /* Sollevamento più visibile */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-color); /* Glow accentuato */
 }
 
-/* Nome */
-.card h1 {
-    font-size: 2em;
+/* * 4. Tipografia 
+ * ------------- 
+ */
+.name {
+    font-size: 2.8rem; /* Nome ancora più in evidenza */
     font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: 2px; /* Spaziatura per un look moderno */
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+}
+
+.tagline {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 35px;
+}
+
+.separator {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-light), transparent);
+    margin: 40px 0;
+}
+
+.email-text {
+    margin-top: 25px;
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+}
+
+.email-text i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+/* * 5. Link Social (Design a cerchio e animazione)
+ * ------------------------------------------------ 
+ */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
     margin-bottom: 10px;
 }
 
-/* Motto */
-.motto {
-    font-size: 1em;
-    font-weight: 400;
-    margin-bottom: 30px;
-    color: #ccc;
-}
-
-/* Contatti */
-.contacts {
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.6rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 15px;
+    align-items: center;
+    border: 1px solid var(--border-light);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transizione "bounce" */
 }
 
-/* Icone */
-.contact-icon {
-    color: #f0f0f0;
-    font-size: 1.5em;
-    transition: transform 0.3s, color 0.3s;
+.social-links a:hover {
+    color: var(--primary-color); 
+    background-color: rgba(0, 191, 255, 0.05); /* Sfondo leggero all'hover */
+    border-color: var(--primary-color);
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: var(--hover-glow);
 }
 
-.contact-icon:hover {
-    transform: scale(1.2);
-    color: #4da6ff;
-}
-
-/* Email testo chiaro */
-.email-text {
-    font-size: 0.9em;
-    color: #ccc;
-    word-break: break-all;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 400px) {
+/* * 6. Mobile Optimization 
+ * ------------------------
+ */
+@media (max-width: 480px) {
     .card {
-        padding: 30px 20px;
+        padding: 40px 25px;
     }
-    .card h1 {
-        font-size: 1.7em;
+    
+    .name {
+        font-size: 2.2rem;
+        letter-spacing: 1.5px;
     }
-    .contact-icon {
-        font-size: 1.3em;
+
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .social-links {
+        gap: 20px;
+    }
+
+    .social-links a {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
     }
 }
