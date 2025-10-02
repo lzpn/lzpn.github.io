@@ -25,13 +25,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    /* Rimuoviamo il padding qui, lo gestiamo nella card-container */
     line-height: 1.6;
-    overflow: hidden; /* Nasconde l'overflow dell'effetto sfondo */
+    overflow-x: hidden; /* Importante per prevenire lo scroll orizzontale su mobile */
 }
 
-/* * 2. Effetto Sfondo Dinamico (Esempio Blob/Gradiente Animato)
- * ------------------------------------------------------------ 
+/* * 2. Effetto Sfondo Dinamico (Blob/Gradiente Animato)
+ * ---------------------------------------------------- 
  */
 .background-effect {
     position: fixed;
@@ -39,12 +39,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Utilizzo di un gradiente radiale per un effetto luce diffusa */
     background: radial-gradient(circle at 10% 90%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 90% 10%, rgba(255, 0, 200, 0.15) 0%, transparent 50%);
     opacity: 0.8;
     z-index: -1;
-    /* Opzionale: animazione lenta per un effetto "breathing" */
     animation: gradientShift 20s ease infinite alternate;
 }
 
@@ -53,41 +51,42 @@ body {
     100% { background-size: 400% 400%; background-position: 100% 50%; }
 }
 
-
 /* * 3. Stile della Card Centrale (Glassmorphism + Glow)
  * ---------------------------------------------------- 
  */
 .card-container {
     width: 100%;
     max-width: 420px; 
-    padding: 20px;
+    /* Aggiungiamo padding verticale per assicurare spazio sui dispositivi molto piccoli */
+    padding: 20px 20px; 
+    /* Aggiunto per evitare che la card si attacchi ai bordi su schermi stretti */
 }
 
 .card {
     background: var(--card-bg-blur);
-    border-radius: 24px; /* Bordi più accentuati */
-    padding: 50px 35px; /* Spaziatura maggiore */
+    border-radius: 24px;
+    padding: 50px 35px; 
     text-align: center;
-    border: 1px solid rgba(0, 191, 255, 0.2); /* Bordo glass più chiaro */
-    backdrop-filter: blur(15px); /* Effetto Glassmorphism più forte */
+    border: 1px solid rgba(0, 191, 255, 0.2);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--hover-glow); /* Ombra profonda e glow sottile */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--hover-glow);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card:hover {
-    transform: translateY(-8px); /* Sollevamento più visibile */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-color); /* Glow accentuato */
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-color);
 }
 
 /* * 4. Tipografia 
  * ------------- 
  */
 .name {
-    font-size: 2.8rem; /* Nome ancora più in evidenza */
+    font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 5px;
-    letter-spacing: 2px; /* Spaziatura per un look moderno */
+    letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
 }
@@ -119,8 +118,8 @@ body {
     color: var(--primary-color);
 }
 
-/* * 5. Link Social (Design a cerchio e animazione)
- * ------------------------------------------------ 
+/* * 5. Link Social 
+ * ---------------- 
  */
 .social-links {
     display: flex;
@@ -139,41 +138,70 @@ body {
     justify-content: center;
     align-items: center;
     border: 1px solid var(--border-light);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transizione "bounce" */
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .social-links a:hover {
     color: var(--primary-color); 
-    background-color: rgba(0, 191, 255, 0.05); /* Sfondo leggero all'hover */
+    background-color: rgba(0, 191, 255, 0.05);
     border-color: var(--primary-color);
     transform: scale(1.15) rotate(5deg);
     box-shadow: var(--hover-glow);
 }
 
-/* * 6. Mobile Optimization 
- * ------------------------
+/* * 6. Ottimizzazione Mobile (Media Queries Rinforzate)
+ * ---------------------------------------------------- 
  */
+
+/* Regole specifiche per schermi piccoli (smartphone verticali) */
 @media (max-width: 480px) {
+    /* Il body deve avere più spazio per evitare che la card tocchi i bordi */
+    body {
+        padding: 10vh 10px; /* Padding più ampio in alto/basso per la centratura visiva */
+        align-items: flex-start; /* Permette alla card di non essere compressa */
+    }
+
+    .card-container {
+        /* Rimuoviamo il padding laterale qui, lo gestisce il body */
+        padding: 0; 
+    }
+
     .card {
-        padding: 40px 25px;
+        padding: 35px 20px; /* Riduci il padding interno della card */
+        border-radius: 16px; /* Bordi leggermente meno arrotondati su mobile */
     }
     
     .name {
-        font-size: 2.2rem;
+        font-size: 2rem; /* Riduci la dimensione del nome */
         letter-spacing: 1.5px;
     }
 
     .tagline {
-        font-size: 1rem;
+        font-size: 0.9rem; /* Riduci la dimensione del motto */
+        margin-bottom: 25px;
     }
     
     .social-links {
-        gap: 20px;
+        gap: 15px; /* Riduci lo spazio tra le icone */
     }
 
     .social-links a {
-        width: 45px;
-        height: 45px;
-        font-size: 1.4rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem; /* Riduci la dimensione delle icone */
+    }
+    
+    .email-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Regola aggiuntiva per schermi molto piccoli (es. iPhone SE, vecchi Android) */
+@media (max-width: 340px) {
+    .name {
+        font-size: 1.8rem;
+    }
+    .card {
+        padding: 30px 15px;
     }
 }
