@@ -3,12 +3,13 @@
  */
 :root {
     /* Colori */
-    --primary-color: #00BFFF; /* Ciano brillante per accenti */
+    --primary-color: #2196F3; /* Blu originale (mantenuto come secondario) */
+    --fluo-green: #39FF14; /* ✅ NUOVO: Verde Fluo / Lime */
     --text-light: #F0F0F0;
-    --background-dark: #0A0A10; /* Nero quasi assoluto */
-    --card-bg-blur: rgba(15, 15, 25, 0.75); /* Sfondo scuro semi-trasparente */
+    --text-dark: #333333;
+    --background-dark: #121212; 
+    --card-bg-blur: rgba(30, 30, 30, 0.8); 
     --border-light: rgba(255, 255, 255, 0.1);
-    --hover-glow: 0 0 10px rgba(0, 191, 255, 0.6);
 }
 
 * {
@@ -19,148 +20,133 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--background-dark); 
+    /* Sfondo scuro con gradiente semplice */
+    background: linear-gradient(135deg, var(--background-dark) 0%, #000000 100%); 
     color: var(--text-light);
     min-height: 100vh;
+    
+    /* Centratura per desktop e mobile */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
+    
     padding: 20px;
     line-height: 1.6;
-    overflow: hidden; /* Nasconde l'overflow dell'effetto sfondo */
+    overflow-x: hidden; 
 }
 
-/* * 2. Effetto Sfondo Dinamico (Esempio Blob/Gradiente Animato)
- * ------------------------------------------------------------ 
- */
-.background-effect {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Utilizzo di un gradiente radiale per un effetto luce diffusa */
-    background: radial-gradient(circle at 10% 90%, rgba(0, 191, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 90% 10%, rgba(255, 0, 200, 0.15) 0%, transparent 50%);
-    opacity: 0.8;
-    z-index: -1;
-    /* Opzionale: animazione lenta per un effetto "breathing" */
-    animation: gradientShift 20s ease infinite alternate;
-}
-
-@keyframes gradientShift {
-    0% { background-size: 400% 400%; background-position: 0% 50%; }
-    100% { background-size: 400% 400%; background-position: 100% 50%; }
-}
-
-
-/* * 3. Stile della Card Centrale (Glassmorphism + Glow)
- * ---------------------------------------------------- 
+/* * 2. Stile della Card Centrale 
+ * ---------------------------- 
  */
 .card-container {
     width: 100%;
-    max-width: 420px; 
-    padding: 20px;
+    max-width: 400px; 
+    padding: 0;
 }
 
 .card {
     background: var(--card-bg-blur);
-    border-radius: 24px; /* Bordi più accentuati */
-    padding: 50px 35px; /* Spaziatura maggiore */
+    border-radius: 20px;
+    padding: 40px 30px;
     text-align: center;
-    border: 1px solid rgba(0, 191, 255, 0.2); /* Bordo glass più chiaro */
-    backdrop-filter: blur(15px); /* Effetto Glassmorphism più forte */
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--hover-glow); /* Ombra profonda e glow sottile */
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid var(--border-light); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); 
+    transition: transform 0.3s ease-in-out;
 }
 
 .card:hover {
-    transform: translateY(-8px); /* Sollevamento più visibile */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px var(--primary-color); /* Glow accentuato */
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* * 4. Tipografia 
- * ------------- 
+/* * 3. Tipografia (APPLICAZIONE VERDE FLUO)
+ * ----------------------------------------- 
  */
 .name {
-    font-size: 2.8rem; /* Nome ancora più in evidenza */
+    font-size: 2.5rem; 
     font-weight: 700;
     margin-bottom: 5px;
-    letter-spacing: 2px; /* Spaziatura per un look moderno */
-    text-transform: uppercase;
-    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+    letter-spacing: 1px;
+    /* ✅ Verde Fluo al Nome */
+    color: var(--fluo-green); 
+    /* Aggiunto un leggero bagliore (glow) per esaltare il Fluo */
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
 }
 
 .tagline {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 35px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    /* Manteniamo il Blu originale per i titoli minori */
+    color: var(--primary-color); 
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.email-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.7;
 }
 
 .separator {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--border-light), transparent);
-    margin: 40px 0;
+    background-color: var(--border-light);
+    margin: 30px 0;
 }
 
-.email-text {
-    margin-top: 25px;
-    font-size: 1rem;
-    font-weight: 400;
-    opacity: 0.9;
-    letter-spacing: 0.5px;
-}
-
-.email-text i {
-    margin-right: 8px;
-    color: var(--primary-color);
-}
-
-/* * 5. Link Social (Design a cerchio e animazione)
- * ------------------------------------------------ 
+/* * 4. Link Social (Hover in Verde Fluo)
+ * ------------------------------------- 
  */
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 30px; 
-    margin-bottom: 10px;
+    gap: 25px; 
+    margin-bottom: 15px;
 }
 
 .social-links a {
     color: var(--text-light);
-    font-size: 1.6rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--border-light);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transizione "bounce" */
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+    display: inline-flex; 
 }
 
 .social-links a:hover {
-    color: var(--primary-color); 
-    background-color: rgba(0, 191, 255, 0.05); /* Sfondo leggero all'hover */
-    border-color: var(--primary-color);
-    transform: scale(1.15) rotate(5deg);
-    box-shadow: var(--hover-glow);
+    /* ✅ Hover in Verde Fluo */
+    color: var(--fluo-green); 
+    /* Aggiunto un glow all'hover per le icone */
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.8);
+    transform: scale(1.15); 
 }
 
-/* * 6. Mobile Optimization 
- * ------------------------
+/* * 5. Ottimizzazione Mobile 
+ * ------------------------ 
  */
 @media (max-width: 480px) {
+    body {
+        padding: 5vh 15px; 
+        min-height: 100vh; 
+    }
+
     .card {
-        padding: 40px 25px;
+        padding: 30px 20px;
     }
     
     .name {
-        font-size: 2.2rem;
-        letter-spacing: 1.5px;
+        font-size: 2rem;
+        text-shadow: 0 0 5px rgba(57, 255, 20, 0.5); /* Bagliore ridotto su mobile */
     }
 
     .tagline {
@@ -172,8 +158,10 @@ body {
     }
 
     .social-links a {
-        width: 45px;
-        height: 45px;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+    }
+    
+    .email-text {
+        font-size: 0.85rem;
     }
 }
