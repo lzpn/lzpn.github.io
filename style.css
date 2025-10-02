@@ -3,10 +3,9 @@
  */
 :root {
     /* Colori */
-    --primary-color: #2196F3; /* Blu originale (mantenuto come secondario) */
-    --fluo-green: #39FF14; /* ✅ NUOVO: Verde Fluo / Lime */
+    --primary-color: #2196F3; /* Blu di riserva */
+    --fluo-green: #39FF14; /* Verde Fluo */
     --text-light: #F0F0F0;
-    --text-dark: #333333;
     --background-dark: #121212; 
     --card-bg-blur: rgba(30, 30, 30, 0.8); 
     --border-light: rgba(255, 255, 255, 0.1);
@@ -32,7 +31,7 @@ body {
     
     padding: 20px;
     line-height: 1.6;
-    overflow-x: hidden; 
+    overflow-x: hidden; /* Previene lo scroll orizzontale */
 }
 
 /* * 2. Stile della Card Centrale 
@@ -50,7 +49,7 @@ body {
     padding: 40px 30px;
     text-align: center;
     border: 1px solid var(--border-light); 
-    backdrop-filter: blur(8px); 
+    backdrop-filter: blur(8px); /* Glassmorphism leggero */
     -webkit-backdrop-filter: blur(8px); 
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); 
     transition: transform 0.3s ease-in-out;
@@ -71,7 +70,6 @@ body {
     letter-spacing: 1px;
     /* ✅ Verde Fluo al Nome */
     color: var(--fluo-green); 
-    /* Aggiunto un leggero bagliore (glow) per esaltare il Fluo */
     text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
 }
 
@@ -79,31 +77,18 @@ body {
     font-size: 1.1rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 25px;
+    /* Riduci il margine inferiore poiché non c'è più h2 */
+    margin-bottom: 30px; 
 }
 
-h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    /* Manteniamo il Blu originale per i titoli minori */
-    color: var(--primary-color); 
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.email-text {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    font-weight: 400;
-    opacity: 0.7;
-}
+/* h2 e .email-text sono stati rimossi dal CSS */
 
 .separator {
     border: none;
     height: 1px;
     background-color: var(--border-light);
-    margin: 30px 0;
+    /* Riduci il margine superiore per avvicinare i contatti */
+    margin: 30px 0 20px; 
 }
 
 /* * 4. Link Social (Hover in Verde Fluo)
@@ -112,8 +97,9 @@ h2 {
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 25px; 
-    margin-bottom: 15px;
+    /* Spaziatura più ampia ora che sono gli unici elementi sotto la riga */
+    gap: 30px; 
+    margin-bottom: 0; /* Nessun elemento sotto, quindi margine zero */
 }
 
 .social-links a {
@@ -124,15 +110,14 @@ h2 {
 }
 
 .social-links a:hover {
-    /* ✅ Hover in Verde Fluo */
+    /* ✅ Hover in Verde Fluo con Glow */
     color: var(--fluo-green); 
-    /* Aggiunto un glow all'hover per le icone */
     text-shadow: 0 0 5px rgba(57, 255, 20, 0.8);
     transform: scale(1.15); 
 }
 
-/* * 5. Ottimizzazione Mobile 
- * ------------------------ 
+/* * 5. Ottimizzazione Mobile (Fix per il "Pull-to-Refresh")
+ * ------------------------------------------------------ 
  */
 @media (max-width: 480px) {
     body {
@@ -146,22 +131,24 @@ h2 {
     
     .name {
         font-size: 2rem;
-        text-shadow: 0 0 5px rgba(57, 255, 20, 0.5); /* Bagliore ridotto su mobile */
+        text-shadow: 0 0 5px rgba(57, 255, 20, 0.5); 
     }
 
     .tagline {
         font-size: 1rem;
+        /* Riduci il margine per coerenza mobile */
+        margin-bottom: 25px; 
     }
     
+    .separator {
+        margin: 25px 0 15px;
+    }
+
     .social-links {
-        gap: 20px;
+        gap: 25px;
     }
 
     .social-links a {
         font-size: 1.6rem;
-    }
-    
-    .email-text {
-        font-size: 0.85rem;
     }
 }
